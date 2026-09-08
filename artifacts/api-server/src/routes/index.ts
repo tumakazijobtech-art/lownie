@@ -1,10 +1,10 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
-import nichanueRouter from "./nichanue";
+import lownieRouter from "./lownie";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
-router.use(nichanueRouter);
+router.use(lownieRouter);
 
 export default router;

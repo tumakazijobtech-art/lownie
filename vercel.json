@@ -1,7 +1,7 @@
 {
   "framework": "vite",
   "installCommand": "corepack enable && pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm --filter @workspace/nichanue run build",
+  "buildCommand": "pnpm --filter @workspace/lownie run build",
   "outputDirectory": "dist",
   "rewrites": [
     {

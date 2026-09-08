@@ -10,8 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
-  - name: nichanue
-    description: Nichanue application workflow
+  - name: lownie
+    description: Lownie application workflow
 paths:
   /healthz:
     get:
@@ -26,22 +26,22 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
-  /nichanue/config:
+  /lownie/config:
     get:
-      operationId: getNichanueConfig
-      tags: [nichanue]
-      summary: Get the current Nichanue fee and provider readiness
+      operationId: getLownieConfig
+      tags: [lownie]
+      summary: Get the current Lownie fee and provider readiness
       responses:
         "200":
-          description: Nichanue configuration
+          description: Lownie configuration
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NichanueConfig"
-  /nichanue/verification/start:
+                $ref: "#/components/schemas/LownieConfig"
+  /lownie/verification/start:
     post:
       operationId: startPhoneVerification
-      tags: [nichanue]
+      tags: [lownie]
       summary: Start phone verification with Talk Sasa
       requestBody:
         required: true
@@ -58,10 +58,10 @@ paths:
                 $ref: "#/components/schemas/VerificationStart"
         "400":
           description: Invalid phone number
-  /nichanue/verification/confirm:
+  /lownie/verification/confirm:
     post:
       operationId: confirmPhoneVerification
-      tags: [nichanue]
+      tags: [lownie]
       summary: Confirm a phone verification code
       requestBody:
         required: true
@@ -78,30 +78,30 @@ paths:
                 $ref: "#/components/schemas/VerificationResult"
         "400":
           description: Invalid verification code
-  /nichanue/applications:
+  /lownie/applications:
     post:
-      operationId: createNichanueApplication
-      tags: [nichanue]
-      summary: Create a Nichanue application after phone verification
+      operationId: createLownieApplication
+      tags: [lownie]
+      summary: Create a Lownie application after phone verification
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NichanueApplicationInput"
+              $ref: "#/components/schemas/LownieApplicationInput"
       responses:
         "201":
           description: Application created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NichanueApplication"
+                $ref: "#/components/schemas/LownieApplication"
         "400":
           description: Invalid application
-  /nichanue/payments/initialize:
+  /lownie/payments/initialize:
     post:
-      operationId: initializeNichanuePayment
-      tags: [nichanue]
+      operationId: initializeLowniePayment
+      tags: [lownie]
       summary: Initialize the Paystack fee payment
       requestBody:
         required: true
@@ -118,10 +118,10 @@ paths:
                 $ref: "#/components/schemas/PaymentInitialization"
         "400":
           description: Invalid payment request
-  /nichanue/payments/verify/{reference}:
+  /lownie/payments/verify/{reference}:
     get:
-      operationId: verifyNichanuePayment
-      tags: [nichanue]
+      operationId: verifyLowniePayment
+      tags: [lownie]
       summary: Verify a Paystack payment
       parameters:
         - name: reference
@@ -136,11 +136,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PaymentVerification"
-  /nichanue/tickets/{applicationId}/download:
+  /lownie/tickets/{applicationId}/download:
     get:
-      operationId: downloadNichanueTicket
-      tags: [nichanue]
-      summary: Download a Nichanue ID ticket
+      operationId: downloadLownieTicket
+      tags: [lownie]
+      summary: Download a Lownie ID ticket
       parameters:
         - name: applicationId
           in: path
@@ -166,7 +166,7 @@ components:
           type: string
       required:
         - status
-    NichanueConfig:
+    LownieConfig:
       type: object
       properties:
         feeKes:
@@ -216,7 +216,7 @@ components:
         message:
           type: string
       required: [verified, phone, message]
-    NichanueApplicationInput:
+    LownieApplicationInput:
       type: object
       properties:
         name:
@@ -235,12 +235,12 @@ components:
         consent:
           type: boolean
       required: [name, phone, frustrations, verificationId, consent]
-    NichanueApplication:
+    LownieApplication:
       type: object
       properties:
         applicationId:
           type: string
-        nichanueId:
+        lownieId:
           type: string
         name:
           type: string
@@ -258,7 +258,7 @@ components:
           type: boolean
         createdAt:
           type: string
-      required: [applicationId, nichanueId, name, phone, frustrations, status, feeKes, paid, createdAt]
+      required: [applicationId, lownieId, name, phone, frustrations, status, feeKes, paid, createdAt]
     PaymentInput:
       type: object
       properties:

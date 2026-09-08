@@ -18,9 +18,9 @@ export const HealthCheckResponse = zod.object({
 
 
 /**
- * @summary Get the current Nichanue fee and provider readiness
+ * @summary Get the current Lownie fee and provider readiness
  */
-export const GetNichanueConfigResponse = zod.object({
+export const GetLownieConfigResponse = zod.object({
   "feeKes": zod.number(),
   "currency": zod.string(),
   "talkSasaReady": zod.boolean(),
@@ -69,26 +69,26 @@ export const ConfirmPhoneVerificationResponse = zod.object({
 
 
 /**
- * @summary Create a Nichanue application after phone verification
+ * @summary Create a Lownie application after phone verification
  */
-export const createNichanueApplicationBodyNameMin = 2;
+export const createLownieApplicationBodyNameMin = 2;
 
-export const createNichanueApplicationBodyPhoneMin = 9;
-
-
+export const createLownieApplicationBodyPhoneMin = 9;
 
 
-export const CreateNichanueApplicationBody = zod.object({
-  "name": zod.string().min(createNichanueApplicationBodyNameMin),
-  "phone": zod.string().min(createNichanueApplicationBodyPhoneMin),
+
+
+export const CreateLownieApplicationBody = zod.object({
+  "name": zod.string().min(createLownieApplicationBodyNameMin),
+  "phone": zod.string().min(createLownieApplicationBodyPhoneMin),
   "frustrations": zod.array(zod.string()).min(1),
   "verificationId": zod.string(),
   "consent": zod.boolean()
 })
 
-export const CreateNichanueApplicationResponse = zod.object({
+export const CreateLownieApplicationResponse = zod.object({
   "applicationId": zod.string(),
-  "nichanueId": zod.string(),
+  "lownieId": zod.string(),
   "name": zod.string(),
   "phone": zod.string(),
   "frustrations": zod.array(zod.string()),
@@ -102,12 +102,12 @@ export const CreateNichanueApplicationResponse = zod.object({
 /**
  * @summary Initialize the Paystack fee payment
  */
-export const InitializeNichanuePaymentBody = zod.object({
+export const InitializeLowniePaymentBody = zod.object({
   "applicationId": zod.string(),
   "email": zod.string().email()
 })
 
-export const InitializeNichanuePaymentResponse = zod.object({
+export const InitializeLowniePaymentResponse = zod.object({
   "reference": zod.string(),
   "authorizationUrl": zod.string(),
   "accessCode": zod.string()
@@ -117,11 +117,11 @@ export const InitializeNichanuePaymentResponse = zod.object({
 /**
  * @summary Verify a Paystack payment
  */
-export const VerifyNichanuePaymentParams = zod.object({
+export const VerifyLowniePaymentParams = zod.object({
   "reference": zod.coerce.string()
 })
 
-export const VerifyNichanuePaymentResponse = zod.object({
+export const VerifyLowniePaymentResponse = zod.object({
   "paid": zod.boolean(),
   "reference": zod.string(),
   "applicationId": zod.string(),
@@ -130,12 +130,12 @@ export const VerifyNichanuePaymentResponse = zod.object({
 
 
 /**
- * @summary Download a Nichanue ID ticket
+ * @summary Download a Lownie ID ticket
  */
-export const DownloadNichanueTicketParams = zod.object({
+export const DownloadLownieTicketParams = zod.object({
   "applicationId": zod.coerce.string()
 })
 
-export const DownloadNichanueTicketResponse = zod.unknown()
+export const DownloadLownieTicketResponse = zod.unknown()
 
 

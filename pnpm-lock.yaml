@@ -415,7 +415,7 @@ importers:
         specifier: 'catalog:'
         version: 3.25.76
 
-  artifacts/nichanue:
+  artifacts/lownie:
     devDependencies:
       '@hookform/resolvers':
         specifier: ^3.10.0

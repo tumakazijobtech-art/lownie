@@ -7,9 +7,9 @@
  */
 
 export * from './healthStatus';
-export * from './nichanueApplication';
-export * from './nichanueApplicationInput';
-export * from './nichanueConfig';
+export * from './lownieApplication';
+export * from './lownieApplicationInput';
+export * from './lownieConfig';
 export * from './paymentInitialization';
 export * from './paymentInput';
 export * from './paymentVerification';

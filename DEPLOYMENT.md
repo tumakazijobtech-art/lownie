@@ -1,8 +1,8 @@
-# NICHANUE deployment guide (Vercel only)
+# LOWNIE deployment guide (Vercel only)
 
 Both halves of the app deploy from this one repo, to one Vercel project:
 
-- `artifacts/nichanue` — React/Vite frontend, built to static files
+- `artifacts/lownie` — React/Vite frontend, built to static files
 - `artifacts/api-server` — Express API, run as a Vercel serverless function via `api/index.ts`
 
 Because the frontend and API share the same Vercel domain, no `CORS_ORIGIN` or `VITE_API_URL`
@@ -18,8 +18,8 @@ the function.
    files in `api/` as serverless functions automatically.
 4. Add these environment variables in the Vercel project settings:
    - `MONGODB_URI` — a MongoDB connection string
-   - `MONGODB_DB` — optional, defaults to `nichanue`
-   - `NICHANUE_FEE_KES` — optional, defaults to `50`
+   - `MONGODB_DB` — optional, defaults to `lownie`
+   - `LOWNIE_FEE_KES` — optional, defaults to `50`
    - `PAYSTACK_SECRET_KEY` — your Paystack secret key
    - `PAYSTACK_CALLBACK_URL` — optional Paystack callback URL
    - `TALKSASA_API_KEY` — your Talk Sasa API key
@@ -46,7 +46,7 @@ pnpm install
 PORT=5000 pnpm --filter @workspace/api-server run dev
 
 # Terminal 2
-PORT=5173 BASE_PATH=/ pnpm --filter @workspace/nichanue run dev
+PORT=5173 BASE_PATH=/ pnpm --filter @workspace/lownie run dev
 ```
 
 The API is available at `http://localhost:5000/api`, and the frontend is available at
@@ -63,7 +63,7 @@ vercel dev
 
 ## Verification-session storage
 
-`artifacts/api-server/src/lib/nichanue-store.ts` stores verification sessions in the
+`artifacts/api-server/src/lib/lownie-store.ts` stores verification sessions in the
 `verification_sessions` MongoDB collection. This is required for Vercel because the start
 and confirm requests can run in different short-lived serverless instances. Codes are
 stored as HMAC hashes, expire after 10 minutes, and are limited to five attempts.

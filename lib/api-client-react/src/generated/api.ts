@@ -21,9 +21,9 @@ import type {
 
 import type {
   HealthStatus,
-  NichanueApplication,
-  NichanueApplicationInput,
-  NichanueConfig,
+  LownieApplication,
+  LownieApplicationInput,
+  LownieConfig,
   PaymentInitialization,
   PaymentInput,
   PaymentVerification,
@@ -138,20 +138,20 @@ export function useHealthCheck<TData = Awaited<ReturnType<typeof healthCheck>>, 
 
 
 
-export const getGetNichanueConfigUrl = () => {
+export const getGetLownieConfigUrl = () => {
 
 
 
 
-  return `/api/nichanue/config`
+  return `/api/lownie/config`
 }
 
 /**
- * @summary Get the current Nichanue fee and provider readiness
+ * @summary Get the current Lownie fee and provider readiness
  */
-export const getNichanueConfig = async ( options?: Parameters<typeof customFetch>[1]): Promise<NichanueConfig> => {
+export const getLownieConfig = async ( options?: Parameters<typeof customFetch>[1]): Promise<LownieConfig> => {
 
-  return customFetch<NichanueConfig>(getGetNichanueConfigUrl(),
+  return customFetch<LownieConfig>(getGetLownieConfigUrl(),
   {
     ...options,
     method: 'GET'
@@ -164,45 +164,45 @@ export const getNichanueConfig = async ( options?: Parameters<typeof customFetch
 
 
 
-export const getGetNichanueConfigQueryKey = () => {
+export const getGetLownieConfigQueryKey = () => {
     return [
-    `/api/nichanue/config`
+    `/api/lownie/config`
     ] as const;
     }
 
 
-export const getGetNichanueConfigQueryOptions = <TData = Awaited<ReturnType<typeof getNichanueConfig>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getNichanueConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export const getGetLownieConfigQueryOptions = <TData = Awaited<ReturnType<typeof getLownieConfig>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLownieConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetNichanueConfigQueryKey();
+  const queryKey =  queryOptions?.queryKey ?? getGetLownieConfigQueryKey();
 
 
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getNichanueConfig>>> = ({ signal }) => getNichanueConfig({ signal, ...requestOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLownieConfig>>> = ({ signal }) => getLownieConfig({ signal, ...requestOptions });
 
 
 
 
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getNichanueConfig>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLownieConfig>>, TError, TData> & { queryKey: QueryKey }
 }
 
-export type GetNichanueConfigQueryResult = NonNullable<Awaited<ReturnType<typeof getNichanueConfig>>>
-export type GetNichanueConfigQueryError = ErrorType<unknown>
+export type GetLownieConfigQueryResult = NonNullable<Awaited<ReturnType<typeof getLownieConfig>>>
+export type GetLownieConfigQueryError = ErrorType<unknown>
 
 
 /**
- * @summary Get the current Nichanue fee and provider readiness
+ * @summary Get the current Lownie fee and provider readiness
  */
 
-export function useGetNichanueConfig<TData = Awaited<ReturnType<typeof getNichanueConfig>>, TError = ErrorType<unknown>>(
-  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getNichanueConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export function useGetLownieConfig<TData = Awaited<ReturnType<typeof getLownieConfig>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLownieConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
-  const queryOptions = getGetNichanueConfigQueryOptions(options)
+  const queryOptions = getGetLownieConfigQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
@@ -220,7 +220,7 @@ export const getStartPhoneVerificationUrl = () => {
 
 
 
-  return `/api/nichanue/verification/start`
+  return `/api/lownie/verification/start`
 }
 
 /**
@@ -291,7 +291,7 @@ export const getConfirmPhoneVerificationUrl = () => {
 
 
 
-  return `/api/nichanue/verification/confirm`
+  return `/api/lownie/verification/confirm`
 }
 
 /**
@@ -357,25 +357,25 @@ export const useConfirmPhoneVerification = <TError = ErrorType<void>,
       return useMutation(getConfirmPhoneVerificationMutationOptions(options));
     }
 
-export const getCreateNichanueApplicationUrl = () => {
+export const getCreateLownieApplicationUrl = () => {
 
 
 
 
-  return `/api/nichanue/applications`
+  return `/api/lownie/applications`
 }
 
 /**
- * @summary Create a Nichanue application after phone verification
+ * @summary Create a Lownie application after phone verification
  */
-export const createNichanueApplication = async (nichanueApplicationInput: NichanueApplicationInput, options?: Parameters<typeof customFetch>[1]): Promise<NichanueApplication> => {
+export const createLownieApplication = async (lownieApplicationInput: LownieApplicationInput, options?: Parameters<typeof customFetch>[1]): Promise<LownieApplication> => {
 
-  return customFetch<NichanueApplication>(getCreateNichanueApplicationUrl(),
+  return customFetch<LownieApplication>(getCreateLownieApplicationUrl(),
   {
     ...options,
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...options?.headers },
-    body: JSON.stringify(nichanueApplicationInput)
+    body: JSON.stringify(lownieApplicationInput)
   }
 );}
 
@@ -383,11 +383,11 @@ export const createNichanueApplication = async (nichanueApplicationInput: Nichan
 
 
 
-export const getCreateNichanueApplicationMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createNichanueApplication>>, TError,{data: BodyType<NichanueApplicationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
-): UseMutationOptions<Awaited<ReturnType<typeof createNichanueApplication>>, TError,{data: BodyType<NichanueApplicationInput>}, TContext> => {
+export const getCreateLownieApplicationMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLownieApplication>>, TError,{data: BodyType<LownieApplicationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLownieApplication>>, TError,{data: BodyType<LownieApplicationInput>}, TContext> => {
 
-const mutationKey = ['createNichanueApplication'];
+const mutationKey = ['createLownieApplication'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -397,10 +397,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createNichanueApplication>>, {data: BodyType<NichanueApplicationInput>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLownieApplication>>, {data: BodyType<LownieApplicationInput>}> = (props) => {
           const {data} = props ?? {};
 
-          return  createNichanueApplication(data,requestOptions)
+          return  createLownieApplication(data,requestOptions)
         }
 
 
@@ -410,38 +410,38 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
   return  { mutationFn, ...mutationOptions }}
 
-    export type CreateNichanueApplicationMutationResult = NonNullable<Awaited<ReturnType<typeof createNichanueApplication>>>
-    export type CreateNichanueApplicationMutationBody = BodyType<NichanueApplicationInput>
-    export type CreateNichanueApplicationMutationError = ErrorType<void>
+    export type CreateLownieApplicationMutationResult = NonNullable<Awaited<ReturnType<typeof createLownieApplication>>>
+    export type CreateLownieApplicationMutationBody = BodyType<LownieApplicationInput>
+    export type CreateLownieApplicationMutationError = ErrorType<void>
 
     /**
- * @summary Create a Nichanue application after phone verification
+ * @summary Create a Lownie application after phone verification
  */
-export const useCreateNichanueApplication = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createNichanueApplication>>, TError,{data: BodyType<NichanueApplicationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+export const useCreateLownieApplication = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLownieApplication>>, TError,{data: BodyType<LownieApplicationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
  ): UseMutationResult<
-        Awaited<ReturnType<typeof createNichanueApplication>>,
+        Awaited<ReturnType<typeof createLownieApplication>>,
         TError,
-        {data: BodyType<NichanueApplicationInput>},
+        {data: BodyType<LownieApplicationInput>},
         TContext
       > => {
-      return useMutation(getCreateNichanueApplicationMutationOptions(options));
+      return useMutation(getCreateLownieApplicationMutationOptions(options));
     }
 
-export const getInitializeNichanuePaymentUrl = () => {
+export const getInitializeLowniePaymentUrl = () => {
 
 
 
 
-  return `/api/nichanue/payments/initialize`
+  return `/api/lownie/payments/initialize`
 }
 
 /**
  * @summary Initialize the Paystack fee payment
  */
-export const initializeNichanuePayment = async (paymentInput: PaymentInput, options?: Parameters<typeof customFetch>[1]): Promise<PaymentInitialization> => {
+export const initializeLowniePayment = async (paymentInput: PaymentInput, options?: Parameters<typeof customFetch>[1]): Promise<PaymentInitialization> => {
 
-  return customFetch<PaymentInitialization>(getInitializeNichanuePaymentUrl(),
+  return customFetch<PaymentInitialization>(getInitializeLowniePaymentUrl(),
   {
     ...options,
     method: 'POST',
@@ -454,11 +454,11 @@ export const initializeNichanuePayment = async (paymentInput: PaymentInput, opti
 
 
 
-export const getInitializeNichanuePaymentMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof initializeNichanuePayment>>, TError,{data: BodyType<PaymentInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
-): UseMutationOptions<Awaited<ReturnType<typeof initializeNichanuePayment>>, TError,{data: BodyType<PaymentInput>}, TContext> => {
+export const getInitializeLowniePaymentMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof initializeLowniePayment>>, TError,{data: BodyType<PaymentInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof initializeLowniePayment>>, TError,{data: BodyType<PaymentInput>}, TContext> => {
 
-const mutationKey = ['initializeNichanuePayment'];
+const mutationKey = ['initializeLowniePayment'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -468,10 +468,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof initializeNichanuePayment>>, {data: BodyType<PaymentInput>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof initializeLowniePayment>>, {data: BodyType<PaymentInput>}> = (props) => {
           const {data} = props ?? {};
 
-          return  initializeNichanuePayment(data,requestOptions)
+          return  initializeLowniePayment(data,requestOptions)
         }
 
 
@@ -481,38 +481,38 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
   return  { mutationFn, ...mutationOptions }}
 
-    export type InitializeNichanuePaymentMutationResult = NonNullable<Awaited<ReturnType<typeof initializeNichanuePayment>>>
-    export type InitializeNichanuePaymentMutationBody = BodyType<PaymentInput>
-    export type InitializeNichanuePaymentMutationError = ErrorType<void>
+    export type InitializeLowniePaymentMutationResult = NonNullable<Awaited<ReturnType<typeof initializeLowniePayment>>>
+    export type InitializeLowniePaymentMutationBody = BodyType<PaymentInput>
+    export type InitializeLowniePaymentMutationError = ErrorType<void>
 
     /**
  * @summary Initialize the Paystack fee payment
  */
-export const useInitializeNichanuePayment = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof initializeNichanuePayment>>, TError,{data: BodyType<PaymentInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+export const useInitializeLowniePayment = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof initializeLowniePayment>>, TError,{data: BodyType<PaymentInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
  ): UseMutationResult<
-        Awaited<ReturnType<typeof initializeNichanuePayment>>,
+        Awaited<ReturnType<typeof initializeLowniePayment>>,
         TError,
         {data: BodyType<PaymentInput>},
         TContext
       > => {
-      return useMutation(getInitializeNichanuePaymentMutationOptions(options));
+      return useMutation(getInitializeLowniePaymentMutationOptions(options));
     }
 
-export const getVerifyNichanuePaymentUrl = (reference: string,) => {
+export const getVerifyLowniePaymentUrl = (reference: string,) => {
 
 
 
 
-  return `/api/nichanue/payments/verify/${reference}`
+  return `/api/lownie/payments/verify/${reference}`
 }
 
 /**
  * @summary Verify a Paystack payment
  */
-export const verifyNichanuePayment = async (reference: string, options?: Parameters<typeof customFetch>[1]): Promise<PaymentVerification> => {
+export const verifyLowniePayment = async (reference: string, options?: Parameters<typeof customFetch>[1]): Promise<PaymentVerification> => {
 
-  return customFetch<PaymentVerification>(getVerifyNichanuePaymentUrl(reference),
+  return customFetch<PaymentVerification>(getVerifyLowniePaymentUrl(reference),
   {
     ...options,
     method: 'GET'
@@ -525,45 +525,45 @@ export const verifyNichanuePayment = async (reference: string, options?: Paramet
 
 
 
-export const getVerifyNichanuePaymentQueryKey = (reference: string,) => {
+export const getVerifyLowniePaymentQueryKey = (reference: string,) => {
     return [
-    `/api/nichanue/payments/verify/${reference}`
+    `/api/lownie/payments/verify/${reference}`
     ] as const;
     }
 
 
-export const getVerifyNichanuePaymentQueryOptions = <TData = Awaited<ReturnType<typeof verifyNichanuePayment>>, TError = ErrorType<unknown>>(reference: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof verifyNichanuePayment>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export const getVerifyLowniePaymentQueryOptions = <TData = Awaited<ReturnType<typeof verifyLowniePayment>>, TError = ErrorType<unknown>>(reference: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof verifyLowniePayment>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getVerifyNichanuePaymentQueryKey(reference);
+  const queryKey =  queryOptions?.queryKey ?? getVerifyLowniePaymentQueryKey(reference);
 
 
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof verifyNichanuePayment>>> = ({ signal }) => verifyNichanuePayment(reference, { signal, ...requestOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof verifyLowniePayment>>> = ({ signal }) => verifyLowniePayment(reference, { signal, ...requestOptions });
 
 
 
 
 
-   return  { queryKey, queryFn, enabled: reference !== null && reference !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof verifyNichanuePayment>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, enabled: reference !== null && reference !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof verifyLowniePayment>>, TError, TData> & { queryKey: QueryKey }
 }
 
-export type VerifyNichanuePaymentQueryResult = NonNullable<Awaited<ReturnType<typeof verifyNichanuePayment>>>
-export type VerifyNichanuePaymentQueryError = ErrorType<unknown>
+export type VerifyLowniePaymentQueryResult = NonNullable<Awaited<ReturnType<typeof verifyLowniePayment>>>
+export type VerifyLowniePaymentQueryError = ErrorType<unknown>
 
 
 /**
  * @summary Verify a Paystack payment
  */
 
-export function useVerifyNichanuePayment<TData = Awaited<ReturnType<typeof verifyNichanuePayment>>, TError = ErrorType<unknown>>(
- reference: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof verifyNichanuePayment>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export function useVerifyLowniePayment<TData = Awaited<ReturnType<typeof verifyLowniePayment>>, TError = ErrorType<unknown>>(
+ reference: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof verifyLowniePayment>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
-  const queryOptions = getVerifyNichanuePaymentQueryOptions(reference,options)
+  const queryOptions = getVerifyLowniePaymentQueryOptions(reference,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
@@ -576,20 +576,20 @@ export function useVerifyNichanuePayment<TData = Awaited<ReturnType<typeof verif
 
 
 
-export const getDownloadNichanueTicketUrl = (applicationId: string,) => {
+export const getDownloadLownieTicketUrl = (applicationId: string,) => {
 
 
 
 
-  return `/api/nichanue/tickets/${applicationId}/download`
+  return `/api/lownie/tickets/${applicationId}/download`
 }
 
 /**
- * @summary Download a Nichanue ID ticket
+ * @summary Download a Lownie ID ticket
  */
-export const downloadNichanueTicket = async (applicationId: string, options?: Parameters<typeof customFetch>[1]): Promise<Blob> => {
+export const downloadLownieTicket = async (applicationId: string, options?: Parameters<typeof customFetch>[1]): Promise<Blob> => {
 
-  return customFetch<Blob>(getDownloadNichanueTicketUrl(applicationId),
+  return customFetch<Blob>(getDownloadLownieTicketUrl(applicationId),
   {
     ...options,
     method: 'GET'
@@ -602,45 +602,45 @@ export const downloadNichanueTicket = async (applicationId: string, options?: Pa
 
 
 
-export const getDownloadNichanueTicketQueryKey = (applicationId: string,) => {
+export const getDownloadLownieTicketQueryKey = (applicationId: string,) => {
     return [
-    `/api/nichanue/tickets/${applicationId}/download`
+    `/api/lownie/tickets/${applicationId}/download`
     ] as const;
     }
 
 
-export const getDownloadNichanueTicketQueryOptions = <TData = Awaited<ReturnType<typeof downloadNichanueTicket>>, TError = ErrorType<void>>(applicationId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadNichanueTicket>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export const getDownloadLownieTicketQueryOptions = <TData = Awaited<ReturnType<typeof downloadLownieTicket>>, TError = ErrorType<void>>(applicationId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadLownieTicket>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getDownloadNichanueTicketQueryKey(applicationId);
+  const queryKey =  queryOptions?.queryKey ?? getDownloadLownieTicketQueryKey(applicationId);
 
 
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof downloadNichanueTicket>>> = ({ signal }) => downloadNichanueTicket(applicationId, { signal, ...requestOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof downloadLownieTicket>>> = ({ signal }) => downloadLownieTicket(applicationId, { signal, ...requestOptions });
 
 
 
 
 
-   return  { queryKey, queryFn, enabled: applicationId !== null && applicationId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof downloadNichanueTicket>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, enabled: applicationId !== null && applicationId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof downloadLownieTicket>>, TError, TData> & { queryKey: QueryKey }
 }
 
-export type DownloadNichanueTicketQueryResult = NonNullable<Awaited<ReturnType<typeof downloadNichanueTicket>>>
-export type DownloadNichanueTicketQueryError = ErrorType<void>
+export type DownloadLownieTicketQueryResult = NonNullable<Awaited<ReturnType<typeof downloadLownieTicket>>>
+export type DownloadLownieTicketQueryError = ErrorType<void>
 
 
 /**
- * @summary Download a Nichanue ID ticket
+ * @summary Download a Lownie ID ticket
  */
 
-export function useDownloadNichanueTicket<TData = Awaited<ReturnType<typeof downloadNichanueTicket>>, TError = ErrorType<void>>(
- applicationId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadNichanueTicket>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export function useDownloadLownieTicket<TData = Awaited<ReturnType<typeof downloadLownieTicket>>, TError = ErrorType<void>>(
+ applicationId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadLownieTicket>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
-  const queryOptions = getDownloadNichanueTicketQueryOptions(applicationId,options)
+  const queryOptions = getDownloadLownieTicketQueryOptions(applicationId,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

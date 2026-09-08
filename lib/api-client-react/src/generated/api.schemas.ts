@@ -9,7 +9,7 @@ export interface HealthStatus {
   status: string;
 }
 
-export interface NichanueConfig {
+export interface LownieConfig {
   feeKes: number;
   currency: string;
   talkSasaReady: boolean;
@@ -43,7 +43,7 @@ export interface VerificationResult {
   message: string;
 }
 
-export interface NichanueApplicationInput {
+export interface LownieApplicationInput {
   /** @minLength 2 */
   name: string;
   /** @minLength 9 */
@@ -54,9 +54,9 @@ export interface NichanueApplicationInput {
   consent: boolean;
 }
 
-export interface NichanueApplication {
+export interface LownieApplication {
   applicationId: string;
-  nichanueId: string;
+  lownieId: string;
   name: string;
   phone: string;
   frustrations: string[];
