@@ -20,7 +20,7 @@ import {
   incrementVerificationAttempts,
   markApplicationPaid,
   markVerificationVerified,
-} from "../lib/lownie-store";
+} from "../lib/lownie-store.js";
 
 const router: IRouter = Router();
 

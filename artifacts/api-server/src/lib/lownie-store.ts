@@ -1,6 +1,6 @@
 import { MongoClient, type Collection } from "mongodb";
 import { randomUUID } from "node:crypto";
-import { logger } from "./logger";
+import { logger } from "./logger.js";
 
 export type LownieApplication = {
   applicationId: string;
