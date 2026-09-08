@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Compiled JS/declaration files sitting next to TS source
+# (these packages are TS-source-only; compilation happens at build time)
+artifacts/api-server/src/**/*.js
+artifacts/api-server/src/**/*.js.map
+artifacts/api-server/src/**/*.d.ts
+artifacts/api-server/src/**/*.d.ts.map
+lib/*/src/**/*.js
+lib/*/src/**/*.js.map
+lib/*/src/**/*.d.ts
+lib/*/src/**/*.d.ts.map
+api/**/*.js
+api/**/*.js.map
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor/OS
+.DS_Store
+.vscode/
+.idea/
